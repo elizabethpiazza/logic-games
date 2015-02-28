@@ -5,6 +5,8 @@ var mongoose = require('mongoose');
 
 var Type = require('./models/type');
 var Game = require('./models/game');
+var User = require('./models/user');
+var Attempt = require('./models/attempt');
 
 router.use(function(req, res, next) {
 	// can authenticate, etc here
@@ -34,6 +36,26 @@ router.param('game', function (req, res, next, id) {
 		if (err) { return next(err); }
 		if (!game) { return next(new Error('Sorry, that game doesn\'t exist')); }
 		req.game = game;
+		return next();
+	});
+});
+
+router.param('user', function (req, res, next, id) {
+	var query = User.findById(id);
+	query.exec(function (err, user) {
+		if (err) { return next(err); }
+		if (!user) { return next(new Error('Sorry, that user doesn\'t exist')); }
+		req.user = user;
+		return next();
+	});
+});
+
+router.param('attempt', function (req, res, next, id) {
+	var query = Attempt.findById(id);
+	query.exec(function (err, attempt) {
+		if (err) { return next(err); }
+		if (!attempt) { return next(new Error('Sorry, that attempt doesn\'t exist')); }
+		req.attempt = attempt;
 		return next();
 	});
 });
@@ -116,7 +138,59 @@ router.route('/types/:type/games/:game')
 		});
 	});
 
+router.route('/users')
+	.post(function(req, res, next) {
+		var user = new User(req.body);
+		user.save(function(err) {
+			if (err) { return next(err); }
+			res.json(user);
+		});
+	})
+	.get(function(req, res, next) {
+		User.find(function(err, users) {
+			if (err) { return next(err); }
+			res.json(users);
+		});
+	});
+
+router.route('/users/:user')
+	.get(function(req, res, next) {
+		req.user.populate('attempts', function(err, user) {
+			if (err) { return next(err); }
+			res.json(user);
+		});
+	});
+
+router.route('/users/:user/attempts')
+	.post(function(req, res, next) {
+		var attempt = new Attempt(req.body);
+		attempt.user = req.user;
+		attempt.save(function(err) {
+			if (err) { return next(err); }
+			req.user.attempts.push(attempt);
+			req.user.save(function(err, attempt) {
+				if (err) { return next(err); }
+				res.json(attempt);
+			});
+		});
+	});
+
+router.route('/users/:user/attempts/:attempt')
+	.delete(function(req, res, next) {
+		var attempt = req.attempt;
+		var user = req.user;
+
+		Attempt.findByIdAndRemove(attempt, function(err){
+			if (err) { return next(err); }
+
+			User.update( { _id: user._id }, { $pull: {attempts: attempt._id } }, function(err) {
+				if (err) { return next(err); }
+				res.json(user);
+			});
+		});
+	});
+
 module.exports = router;
 
-
-
+//user test 54f21717837d8d84303a4394
+//game test 54f21a3552bcb904356fae2c
