@@ -1,3 +1,5 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope) {
-	$scope.tagline = 'To the moon and back';
-});
+angular.module('MainCtrl', ['UserService']).controller('MainCtrl', ['$scope', 'user', function($scope, user) {
+	user.getUser();
+	$scope.user = user.user;
+	$scope.attempts = user.attempts;
+}]);

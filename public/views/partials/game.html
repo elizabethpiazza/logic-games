@@ -1,0 +1,38 @@
+<div class="jumbotron text-center">
+	<h1>Game: {{game.identifier.gameno}}, Test: {{game.identifier.testno}}</h1>
+	<p>{{game._id}}</p>
+	<div>
+		Goal time: {{game.goal.minutes}}:{{game.goal.seconds}}
+	</div>
+
+	<p>New Attempt:</p>
+	<form ng-submit="addAttempt()">
+		<div class="form-group">
+			<label>Minutes</label>
+			<input type="text" class="form-control" ng-model="newAttempt.attempt.minutes">
+		</div>
+		<div class="form-group">
+			<label>Seconds</label>
+			<input type="text" class="form-control" ng-model="newAttempt.attempt.seconds">
+		</div>
+		<button class="btn btn-warning btn-lg">Submit</button>
+		<br>{{newAttempt}}
+	</form>
+
+
+
+	<table class="table">
+		<thead>
+			<tr>
+				<td>Game time</td>
+				<td>Attempt date</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="attempt in attempts | filter: { game: game._id }">
+				<td>{{attempt.attempt.time}}</td>
+				<td>{{attempt.attempt.minutes}}:{{attempt.attempt.seconds}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF=8">
+	<base href="/">
+	
+	<title>Logic Games</title>
+
+	<link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<script src="assets/libs/angular/angular.min.js"></script>
+	<script src="assets/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+	<script src="controllers/MainCtrl.js"></script>
+	<script src="controllers/HomeCtrl.js"></script>
+	<script src="controllers/GameCtrl.js"></script>
+	<script src="controllers/GameDetailCtrl.js"></script>
+	<script src="controllers/ProfileCtrl.js"></script>
+	<script src="services/TypesService.js"></script>
+	<script src="services/GamesService.js"></script>
+	<script src="services/UserService.js"></script>
+	<script src="app.js"></script>
+
+
+</head>
+<body ng-app="logic-games" ng-controller="MainCtrl">
+
+	<div class="container">
+
+		<nav class="navbar navbar-default">
+			<div class="navbar-header">
+				<a class="navbar-brand" ui-sref="home">Logic Games</a>
+			</div>
+
+			<ul class="nav navbar-nav">
+				<li><a href="#/game/54f3e492aaaf37903b74adc5">Game</a></li>
+			</ul>
+			<ul class="nav navbar-nav">
+				<li><a href="#/profile">Profile</a></li>
+			</ul>
+		</nav>
+		<p>You are logged in as {{user.local.email}}.  Click <a href="/logout">here</a> to log out.</p>
+		<div ui-view></div>
+
+	</div>
+</body>
+</html>

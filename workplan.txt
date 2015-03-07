@@ -1,0 +1,24 @@
+workplan:
+
+- add edit user info to profile page
+- add timer and auto add option
+- figure out how to calculate success
+- figure out how to test
+- reorg API
+- stylize
+
+XX - add features to game page - allow user to enter new attempt
+XX - clean all messy console logs
+XX - clean up files
+XX - game (shows game info and all attempts for current user)
+XX - implement auth
+XX - skeleton of pages
+XX -- make games clickable, send data
+XX --reuse user service
+XX --rewrite controller
+XX --update to read from DB
+XX -home (shows all types)
+XX -type (shows all tests, filterable by year)
+XX allow user to add new attempt 
+XX- implement ui-router
+XX-- protect /api/
