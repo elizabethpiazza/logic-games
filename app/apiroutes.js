@@ -40,16 +40,6 @@ router.param('game', function (req, res, next, id) {
 	});
 });
 
-router.param('user', function (req, res, next, id) {
-	var query = User.findById(id);
-	query.exec(function (err, user) {
-		if (err) { return next(err); }
-		if (!user) { return next(new Error('Sorry, that user doesn\'t exist')); }
-		req.user = user;
-		return next();
-	});
-});
-
 router.param('attempt', function (req, res, next, id) {
 	var query = Attempt.findById(id);
 	query.exec(function (err, attempt) {
@@ -60,7 +50,18 @@ router.param('attempt', function (req, res, next, id) {
 	});
 });
 
-// All types
+router.param('user', function (req, res, next, id) {
+	var query = User.findById(id);
+	query.exec(function (err, user) {
+		if (err) { return next(err); }
+		if (!user) { return next(new Error('Sorry, that user doesn\'t exist')); }
+		req.user = user;
+		return next();
+	});
+});
+
+
+// All types (on site)
 router.route('/types')
 	.post(function(req, res, next) {
 		var type = new Type(req.body);
@@ -83,6 +84,7 @@ router.route('/types/:type')
 			res.json(type);
 		});
 	})
+	// (next 2 admin only, PUT may be unecessary)
 	.put(function(req, res, next) {
 		var type = req.type;
 		var newType = req.body;
@@ -100,7 +102,15 @@ router.route('/types/:type')
 		res.json({ message: 'Type removed' });
 	});
 
+// for site
 router.route('/types/:type/games')
+	.get(function(req, res, next) {
+		Game.find(function(err, games) {
+			if (err) { return next(err); }
+			res.json(games);
+		});
+	})
+	//admin only
 	.post(function(req, res, next) {
 		var game = new Game(req.body);
 		game.gametype = req.type;
@@ -112,18 +122,14 @@ router.route('/types/:type/games')
 				res.json(game);
 			});
 		});
-	})
-	.get(function(req, res, next) {
-		Game.find(function(err, games) {
-			if (err) { return next(err); }
-			res.json(games);
-		});
 	});
-
+	
+// for site
 router.route('/games/:game')
 	.get(function(req, res, next) {
 		res.json(req.game);
 	})
+	// admin only
 	.delete(function(req, res, next) {
 		var game = req.game;
 		var type = req.game.type;
@@ -138,6 +144,7 @@ router.route('/games/:game')
 		});
 	});
 
+//admin only
 router.route('/users')
 	.post(function(req, res, next) {
 		var user = new User(req.body);
@@ -153,15 +160,27 @@ router.route('/users')
 		});
 	});
 
+// for site
 router.route('/user')
 	.get(function(req, res, next) {
 		req.user.populate('attempts', function(err, user) {
 			if (err) { return next(err); }
 			res.json(user);
 		});
-	});
+	})
+	.put(function(req, res, next) {
+		//do stuff here
+		var user = req.user;
+		var name = req.body;
+		console.log('name = ' + name.first + ' ' + name.last);
+		
+		User.update({ _id: user._id }, { $set: { name: name } }, function(err) {
+			if (err) { return next(new Error('Sorry')); }
+		});
+		res.json(user);
+	})
 
-//eventually test if the following works
+// for site
 router.route('/user/attempt')
 	.post(function(req, res, next) {
 		var attempt = new Attempt(req.body);
@@ -177,7 +196,8 @@ router.route('/user/attempt')
 			});
 		});
 	});
-/*
+
+// test if below works
 router.route('/user/:attempt')
 	.delete(function(req, res, next) {
 		var attempt = req.attempt;
@@ -191,7 +211,7 @@ router.route('/user/:attempt')
 				res.json(user);
 			});
 		});
-	});*/
+	});
 
 // users for admin
 router.route('/users/:user')

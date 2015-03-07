@@ -4,4 +4,17 @@
 	<div>
 		Please set your name and test date!
 	</div>
+	<p>User info:</p>
+	<form ng-submit="updateUser()">
+		<div class="form-group">
+			<label>First name</label>
+			<input type="text" class="form-control" ng-model="user.name.first">
+		</div>
+		<div class="form-group">
+			<label>Last name</label>
+			<input type="text" class="form-control" ng-model="user.name.last">
+		</div>
+		{{user}}
+		<br><button class="btn btn-lg" type="submit">Submit</button>
+	</form>
 </div>

@@ -1,10 +1,12 @@
 workplan:
 
-- add edit user info to profile page
+XX - delete attempts
+XX - add edit user info to profile page
 - add timer and auto add option
 - figure out how to calculate success
-- figure out how to test
+- figure out how to tech test
 - reorg API
+-- do i really need games types and game detail ctrl
 - stylize
 
 XX - add features to game page - allow user to enter new attempt

@@ -11,6 +11,10 @@ angular.module('GameDetailCtrl', ['GamesService', 'UserService']).controller('Ga
 		});
 		$scope.newAttempt = {};
 	};
+	$scope.delAttempt = function(id){
+		user.delAttempt(id);
+	};
+
 }]);
 
 // {"_id":"54f3e492aaaf37903b74adc5","gametype":"54f219fe52bcb904356fae2b","__v":0,"goal":{"minutes":3,"seconds":30},"identifier":{"year":2014,"month":"Dec","testno":74,"gameno":1}}

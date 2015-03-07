@@ -39,8 +39,8 @@ app.config([
 			})
 			.state('profile', {
 				url: '/profile',
-				templateUrl: '/views/partials/profile.ejs'//,
-				//controller: 'ProfileCtrl',
+				templateUrl: '/views/partials/profile.ejs',
+				controller: 'ProfileCtrl'
 			});
 	}
 ]);
