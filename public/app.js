@@ -44,3 +44,12 @@ app.config([
 			});
 	}
 ]);
+
+app.filter('attemptDate', function() {
+	return function (isodate) {
+		if (isodate) {
+			var newdate = new Date(isodate);
+			return newdate.toLocaleString();
+		}
+	};
+});

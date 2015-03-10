@@ -1,18 +1,30 @@
-<div class="jumbotron text-center">
-	<h1>Game Type: {{typename}}</h1>
-	<p>Filter games by year: <input type="text" ng-model="filter.identifier.year"></p>
-	<p>Filter games by test number: <input type="text" ng-model="filter.identifier.testno"></p>
-	<table class="table">
+<div class="container-responsive">
+	<h1>{{typename}} Games</h1>
+	<p>Filter games</p>
+
+
+	<div class="form-inline">
+	  <div class="form-group">
+	    <label for="Year" class="control-label">By year:</label>
+	    <input type="text" ng-model="filter.identifier.year">
+	  </div>
+	  <div class="form-group">
+	    <label for="Test" class="control-label">By test:</label>
+	    <input type="text" ng-model="filter.identifier.testno">
+	  </div>
+	</div>
+
+	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
-				<td>Test Number</td>
-				<td>Game Number</td>
-				<td>Month, Year</td>
+				<th>Test #</th>
+				<th>Game #</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="game in games | filter:filter">
-				<td>{{game.identifier.testno}}<p>{{game._id}}</p></td>
+			<tr ng-repeat="game in games | filter:filter | orderBy:['identifier.testno', 'identifier.gameno']">
+				<td>{{game.identifier.testno}}</td>
 				<td><a href="#/game/{{game._id}}">{{game.identifier.gameno}}</a></td>
 				<td>{{game.identifier.month}} {{game.identifier.year}}</td>
 			</tr>

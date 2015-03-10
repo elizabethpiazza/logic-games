@@ -1,4 +1,5 @@
-<div class="jumbotron text-center">
+<div class="container-fluid">
+	<p><small><a href="#/type/{{game.gametype}}"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></small></p>
 	<h1>Game: {{game.identifier.gameno}}, Test: {{game.identifier.testno}}</h1>
 	<p>{{game._id}}</p>
 	<div>
@@ -20,16 +21,16 @@
 
 
 
-	<table class="table">
+	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
-				<td>Game time</td>
-				<td>Attempt date</td>
+				<th>Attempt date</th>
+				<th>Game time</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="attempt in attempts | filter: { game: game._id }">
-				<td>{{attempt.attempt.time}}</td>
+				<td>{{attempt.attempt.time | attemptDate}}</td>
 				<td>{{attempt.attempt.minutes}}:{{attempt.attempt.seconds}}</td>
 				<td><button ng-click="delAttempt(attempt._id)">Delete</button></td>
 			</tr>

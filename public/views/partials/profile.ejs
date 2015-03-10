@@ -1,20 +1,39 @@
-<div class="jumbotron text-center">
+<div class="container">
 	<h1>Welcome, {{user.local.email}}</h1>
-	<p>{{user._id}}</p>
 	<div>
-		Please set your name and test date!
+		<h3>Your info:</h3>
+		<table class="table">
+			<tr>
+				<td>First Name</td>
+				<td>{{user.name.first}}</td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td>{{user.name.last}}</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>{{user.local.email}}</td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td>**********</td>
+			</tr>
+		</table>
+		<button class="btn btn-sm" onClick="toggleForm('edit-form')">Edit</button>
 	</div>
-	<p>User info:</p>
-	<form ng-submit="updateUser()">
-		<div class="form-group">
-			<label>First name</label>
-			<input type="text" class="form-control" ng-model="user.name.first">
-		</div>
-		<div class="form-group">
-			<label>Last name</label>
-			<input type="text" class="form-control" ng-model="user.name.last">
-		</div>
-		{{user}}
-		<br><button class="btn btn-lg" type="submit">Submit</button>
-	</form>
+	<div id="edit-form" class="hide">
+		<h3>Edit user info:</h3>
+			<form ng-submit="updateUser()">
+				<div class="form-group">
+					<label>First name</label>
+					<input type="text" class="form-control" ng-model="user.name.first">
+				</div>
+				<div class="form-group">
+					<label>Last name</label>
+					<input type="text" class="form-control" ng-model="user.name.last">
+				</div>
+				<br><button class="btn btn-lg" type="submit">Save</button>
+		</form>
+	</div>
 </div>
