@@ -1,0 +1,119 @@
+<div class="container-fluid">
+	<h1>Admin Page</h1>
+
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th>Type id</th>
+				<th>Delete?</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="type in types">
+				<td>{{type.typename}}</td>
+				<td><button ng-click="delType(type._id)">Delete</button></td>
+			</tr>
+			<tr class="form-inline">
+				<td><div class="form-group">
+					<label>Name</label>
+					<input type="text" class="form-control" ng-model="newType.typename">
+				</div></td>
+				<td><div class="form-group">
+					<label>Level</label>
+					<input type="text" class="form-control" ng-model="newType.level">
+				</div></td>
+				<td><button ng-click="addType($scope.newType)">+</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>{{newType}}</p>
+
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th>Test #/Game #</th>
+				<th>Type</th>
+				<th>Mon/Yr</th>
+				<th>Goal</th>
+				<th>Questions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="game in games">
+				<td>{{game.identifier.testno}}, {{game.identifier.gameno}}</td>
+				<td>{{game.gametype}}</td>
+				<td>{{game.identifier.month}} {{game.identifier.year}}</td>
+				<td>{{game.goal.minutes}}:{{game.goal.seconds}}</td>
+				<td>{{game.questions}}</td>
+				<td><button ng-click="delGame(game._id)">Delete</button></td>
+			</tr>
+			<tr class="form-inline">
+				<td><div class="form-group">
+					<label>Test#</label>
+					<input type="text" class="form-control" ng-model="newGame.identifier.testno">
+					<label>Game#</label>
+					<input type="text" class="form-control" ng-model="newGame.identifier.gameno">
+				</div></td>
+				<td><div class="form-group">
+					<label>Type</label>
+					<input type="text" class="form-control" ng-model="newGameType">
+				</div></td>
+				<td><div class="form-group">
+					<label>Month</label>
+					<input type="text" class="form-control" ng-model="newGame.identifier.month">
+					<label>Year</label>
+					<input type="text" class="form-control" ng-model="newGame.identifier.year">
+				</div></td>
+				<td><div class="form-group">
+					<label>Min</label>
+					<input type="text" class="form-control" ng-model="newGame.goal.minutes">
+					<label>Sec</label>
+					<input type="text" class="form-control" ng-model="newGame.goal.seconds">
+				</div></td>
+				<td><div class="form-group">
+					<label>Questions</label>
+					<input type="text" class="form-control" ng-model="newGame.questions">
+				</div></td>
+				<td><button ng-click="addGame($scope.newGame)">+</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<p>{{newGame}}</p>
+	<p>{{newGameType}}</p>
+	<!-- <p>{{game._id}}</p>
+	<div>
+		Goal time: {{game.goal.minutes}}:{{game.goal.seconds}}
+	</div>
+
+	<p>New Attempt:</p>
+	<form ng-submit="addAttempt()">
+		<div class="form-group">
+			<label>Minutes</label>
+			<input type="text" class="form-control" ng-model="newAttempt.attempt.minutes">
+		</div>
+		<div class="form-group">
+			<label>Seconds</label>
+			<input type="text" class="form-control" ng-model="newAttempt.attempt.seconds">
+		</div>
+		<button class="btn">Submit</button>
+	</form>
+
+
+
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th>Attempt date</th>
+				<th>Game time</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="attempt in attempts | filter: { game: game._id }">
+				<td>{{attempt.attempt.time | attemptDate}}</td>
+				<td>{{attempt.attempt.minutes}}:{{attempt.attempt.seconds}}</td>
+				<td><button ng-click="delAttempt(attempt._id)">Delete</button></td>
+			</tr>
+		</tbody>
+	</table> -->
+</div>

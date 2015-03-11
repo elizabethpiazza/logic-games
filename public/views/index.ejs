@@ -26,9 +26,11 @@
 	<script src="controllers/GameCtrl.js"></script>
 	<script src="controllers/GameDetailCtrl.js"></script>
 	<script src="controllers/ProfileCtrl.js"></script>
+	<script src="controllers/AdminCtrl.js"></script>
 	<script src="services/TypesService.js"></script>
 	<script src="services/GamesService.js"></script>
 	<script src="services/UserService.js"></script>
+	<script src="services/AdminService.js"></script>
 	<script src="app.js"></script>
 
 
@@ -51,6 +53,7 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="collapse-menu">
 	      <ul class="nav navbar-nav navbar-right">
+	      	<li role="presentation"><a href="#/admin">Admin</a></li>
 	      	<p class="navbar-text">Signed in as </p>
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{user.name.first}} <span class="caret"></span></a>

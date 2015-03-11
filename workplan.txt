@@ -1,11 +1,14 @@
 workplan:
-
+- reset db to test new models
+- build in success/failure
 - add timer and auto add option
 - figure out how to calculate success
 - figure out how to tech test
 - reorg API
 - stylize
 -- do i really need games types and game detail ctrl
+- number of games each
+- create admin page to add games
 
 XX - add edit user info to profile page
 XX - add features to game page - allow user to enter new attempt

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var TypeSchema = new mongoose.Schema({
-	name: String,
+	typename: String,
 	level: Number,
 	games: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Game' }]
 });

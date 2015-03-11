@@ -1,4 +1,6 @@
 angular.module('GameDetailCtrl', ['GamesService', 'UserService']).controller('GameDetailCtrl', ['$scope', 'games', 'user', function($scope, games, user) {
+	$scope.typename = games.typename;
+	console.log($scope.typename);
 	$scope.game = games.game;
 
 	$scope.newAttempt = { attempt: {minutes: '', seconds: ''}};

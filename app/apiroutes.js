@@ -124,6 +124,15 @@ router.route('/types/:type/games')
 		});
 	});
 	
+// admin
+router.route('/games')
+	.get(function(req, res, next) {
+		Game.find(function(err, games) {
+			if (err) { return next(err); }
+			res.json(games);
+		});
+	});
+
 // for site
 router.route('/games/:game')
 	.get(function(req, res, next) {
@@ -132,14 +141,14 @@ router.route('/games/:game')
 	// admin only
 	.delete(function(req, res, next) {
 		var game = req.game;
-		var type = req.game.type;
+		var gametype = req.game.gametype;
 
 		Game.findByIdAndRemove(game, function(err) {
 			if (err) { return next(err); }
 
-			Type.update( { _id: type._id }, { $pull: { games: game._id} }, function(err) {
+			Type.update( { _id: gametype._id }, { $pull: { games: game._id} }, function(err) {
 				if (err) { return next(err); }
-				res.json(type);
+				res.json(gametype);
 			});
 		});
 	});

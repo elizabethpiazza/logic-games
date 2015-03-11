@@ -1,4 +1,4 @@
-var app = angular.module('logic-games', ['ui.router', 'MainCtrl', 'HomeCtrl', 'GameCtrl', 'GameDetailCtrl', 'ProfileCtrl', 'TypesService', 'GamesService', 'UserService']);
+var app = angular.module('logic-games', ['ui.router', 'MainCtrl', 'HomeCtrl', 'GameCtrl', 'GameDetailCtrl', 'ProfileCtrl', 'AdminCtrl', 'TypesService', 'GamesService', 'UserService', 'AdminService']);
 
 //angular stuff begins here
 app.config([
@@ -41,6 +41,19 @@ app.config([
 				url: '/profile',
 				templateUrl: '/views/partials/profile.ejs',
 				controller: 'ProfileCtrl'
+			})
+			.state('admin', {
+				url: '/admin',
+				templateUrl: '/views/partials/admin.ejs',
+				controller: 'AdminCtrl',
+				resolve: {
+					typePromise: ['admin', function(admin){
+						return admin.getAllTypes();
+					}],
+					gamePromise: ['admin', function(admin){
+						return admin.getAllGames();
+					}]
+				}
 			});
 	}
 ]);
