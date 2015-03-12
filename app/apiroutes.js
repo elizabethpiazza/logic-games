@@ -67,7 +67,7 @@ router.route('/types')
 		var type = new Type(req.body);
 		type.save(function(err) {
 			if (err) { return next(err); }
-			res.json([{ message: 'Saved' }]);
+			res.json(type);
 		});
 	})
 	.get(function(req, res, next) {
@@ -141,13 +141,17 @@ router.route('/games/:game')
 	// admin only
 	.delete(function(req, res, next) {
 		var game = req.game;
+		console.log(game._id);
 		var gametype = req.game.gametype;
+		console.log(gametype);
 
 		Game.findByIdAndRemove(game, function(err) {
 			if (err) { return next(err); }
+			console.log(game._id)
 
-			Type.update( { _id: gametype._id }, { $pull: { games: game._id} }, function(err) {
-				if (err) { return next(err); }
+			Type.findOneAndUpdate( { _id: gametype }, { $pull: { games: game._id} }, function(err) {
+				if (err) { res.json({message: 'this fails'}); }
+				console.log('works');
 				res.json(gametype);
 			});
 		});

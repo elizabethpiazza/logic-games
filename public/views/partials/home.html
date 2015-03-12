@@ -9,8 +9,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="type in types">
-				<td><a href="#/type/{{type._id}}">{{type.name}}</a></td>
+			<tr ng-repeat="type in types | orderBy: 'level'">
+				<td><a href="#/type/{{type._id}}">{{type.typename}}</a></td>
 				<td>{{type.games.length}}</td>
 			</tr>
 		</tbody>

@@ -8,11 +8,13 @@ angular.module('AdminCtrl', ['AdminService']).controller('AdminCtrl', ['$scope',
 			typename : $scope.newType.typename,
 			level : $scope.newType.level
 		});
+		admin.getAllTypes();
 		$scope.newType = {};
 	};
 	$scope.addGame = function(newGame){
 		if ($scope.newGame === {}) { return; }
 		admin.addGame($scope.newGame, $scope.newGameType);
+		admin.getAllGames();
 		$scope.newGame = {};
 	};
 

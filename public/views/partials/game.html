@@ -1,13 +1,14 @@
 <div class="container-fluid">
 	<p><small><a href="#/type/{{game.gametype}}"><span class="glyphicon glyphicon-arrow-left"></span> {{typename}}</a></small></p>
+
 	<h1>Game: {{game.identifier.gameno}}, Test: {{game.identifier.testno}}</h1>
-	<p>{{game._id}}</p>
+
 	<div>
 		Goal time: {{game.goal.minutes}}:{{game.goal.seconds}}
 	</div>
 
 	<p>New Attempt:</p>
-	<form ng-submit="addAttempt()">
+	<form class="form-inline" ng-submit="addAttempt()">
 		<div class="form-group">
 			<label>Minutes</label>
 			<input type="text" class="form-control" ng-model="newAttempt.attempt.minutes">
@@ -16,7 +17,7 @@
 			<label>Seconds</label>
 			<input type="text" class="form-control" ng-model="newAttempt.attempt.seconds">
 		</div>
-		<button class="btn btn-warning btn-lg">Submit</button>
+		<button class="btn btn-sm">Submit</button>
 	</form>
 
 
