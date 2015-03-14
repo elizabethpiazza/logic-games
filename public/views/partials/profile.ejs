@@ -1,5 +1,5 @@
 <div class="container">
-	<h1>Welcome, {{user.local.email}}</h1>
+	<h1>Welcome, {{user.realname.first ? user.realname.first : user.local.email}}</h1>
 	<div>
 		<h3>Your info:</h3>
 		<table class="table">
@@ -20,10 +20,10 @@
 				<td>**********</td>
 			</tr>
 		</table>
-		<button class="btn btn-sm" onClick="toggleForm('edit-form')">Edit</button>
 	</div>
+	<button class="btn btn-sm" onClick="toggleForm('edit-form')">Edit</button>
 	<div id="edit-form" class="hide">
-		<h3>Edit user info:</h3>
+		<h4>Edit user info:</h4>
 			<form ng-submit="updateUser()">
 				<div class="form-group">
 					<label>First name</label>
@@ -33,7 +33,7 @@
 					<label>Last name</label>
 					<input type="text" class="form-control" ng-model="userUpdate.realname.last">
 				</div>
-				<br><button class="btn btn-lg" onClick="toggleForm('edit-form')" type="submit">Save</button>
+				<br><button class="btn btn-sm" ng-click="toggleForm('edit-form')" type="submit">Save</button>
 		</form>
 	</div>
 </div>

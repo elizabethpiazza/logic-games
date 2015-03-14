@@ -8,7 +8,6 @@ angular.module('GamesService', []).factory('games', ['$http', function($http) {
 		return $http.get('/api/types/' + id).success(function(data){
 				angular.copy(data.games, o.games);
 				o.typename = data.typename;
-				console.log(data.typename + ' ' + o.typename);
 		});
 	};
 	o.getGame = function(id) {

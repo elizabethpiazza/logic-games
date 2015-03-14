@@ -4,28 +4,29 @@
 	<h1>Game: {{game.identifier.gameno}}, Test: {{game.identifier.testno}}</h1>
 	<div><b>Your stats:</b> {{(user.attempts| filter:{success:true}).length}}/{{user.attempts.length}}</div>
 	<div>
-		Goal time: {{game.goal.minutes}}:{{game.goal.seconds}}
+		<b>Goal time:</b> {{game.goal.minutes}}:{{game.goal.seconds | fixSeconds}}
 	</div>
 
-	<p>New Attempt:</p>
-	<form class="form-inline" ng-submit="addAttempt()">
-		<div class="form-group">
-			<label>Minutes</label>
-			<input type="number" required="" min="0" max="60" class="form-control" ng-model="newAttempt.attempt.minutes">
-		</div>
-		<div class="form-group">
-			<label>Seconds</label>
-			<input type="number" required="" min="0" max="60" class="form-control" ng-model="newAttempt.attempt.seconds">
-		</div>
-		<div class="form-group">
-			<label>Accuracy</label>
-			<input type="number" required="" min="0" max="{{game.questions}}" class="form-control" ng-model="newAttempt.attempt.accuracy"> / {{game.questions}}
-		</div>
-		<button class="btn btn-sm">Submit</button>
-	</form>
+	<button class="btn btn-sm" onClick="toggleForm('new-attempt-form')">New Attempt</button>
+	<div id="new-attempt-form" class="hide">
+		<h4>New Attempt:</h4>
+			<form class="form-inline" ng-submit="addAttempt()">
+				<div class="form-group">
+					<label>Minutes</label>
+					<input type="number" required="" min="0" max="60" class="form-control" ng-model="newAttempt.attempt.minutes">
+				</div>
+				<div class="form-group">
+					<label>Seconds</label>
+					<input type="number" required="" min="0" max="60" class="form-control" ng-model="newAttempt.attempt.seconds">
+				</div>
+				<div class="form-group">
+					<label>Accuracy</label>
+					<input type="number" required="" min="0" max="{{game.questions}}" class="form-control" ng-model="newAttempt.attempt.accuracy"> / {{game.questions}}
+				</div>
+				<button class="btn btn-sm" ng-click="toggleForm('new-attempt-form')" type="submit">Save</button>
+		</form>
 
-
-
+	</div>
 	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
@@ -36,10 +37,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="attempt in attempts | filter: { game: game._id }">
+			<tr ng-repeat="attempt in attempts | filter: { game: game._id } | orderBy : '-attempt.time'">
 				<td>{{attempt.attempt.time | attemptDate}}</td>
-				<td>{{attempt.attempt.minutes}}:{{attempt.attempt.seconds}}</td>
-				<td>{{attempt.success}}</td>
+				<td>{{attempt.attempt.minutes}}:{{attempt.attempt.seconds | fixSeconds}}</td>
+				<td>{{attempt.success | successCheck}}</td>
 				<td><button ng-click="delAttempt(attempt._id)">Delete</button></td>
 			</tr>
 		</tbody>

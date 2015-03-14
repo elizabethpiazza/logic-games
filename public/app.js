@@ -12,6 +12,9 @@ app.config([
 				templateUrl: '/views/partials/home.html',
 				controller: 'HomeCtrl',
 				resolve: {
+					typePromise: ['users', function(users){
+						return users.getUser();
+					}],
 					typePromise: ['types', function(types){
 						return types.getTypes();
 					}]
@@ -75,6 +78,25 @@ app.filter('resolveType', function(types) {
 					return types[i].typename;
 				}
 			};
+		};
+	};
+});
+
+app.filter('successCheck', function() {
+	return function (input) {
+		if (input) {
+			if (input >= 1 || input == true){
+				return '\u2713';
+			}
+		};
+	};
+});
+
+app.filter('fixSeconds', function() {
+	return function (input) {
+		if (input) {
+			input.toString();
+			return ("0" + input).slice (-2);
 		};
 	};
 });
