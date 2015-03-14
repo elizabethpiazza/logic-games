@@ -26,16 +26,18 @@ angular.module('AdminService', []).factory('admin', ['$http', function($http) {
 		});
 	};*/
 	o.addType = function(newType) {
-		return $http.post('/api/types', newType)
+		$http.post('/api/types', newType)
 		.success(function (data){
 			o.types.push(data);
 		});
+		return o.getAllTypes();
 	};
 	o.addGame = function(newGame, typeid) {
-		return $http.post('/api/types/' + typeid + '/games', newGame)
+		$http.post('/api/types/' + typeid + '/games', newGame)
 		.success(function (data){
 			o.games.push(data);
 		});
+		return o.getAllGames();
 	};
 	o.delType = function (id) {
 		return $http.delete('/api/types/' + id)

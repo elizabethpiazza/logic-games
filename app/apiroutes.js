@@ -184,10 +184,10 @@ router.route('/user')
 	.put(function(req, res, next) {
 		//do stuff here
 		var user = req.user;
-		var name = req.body;
-		console.log('name = ' + name.first + ' ' + name.last);
+		var realname = req.body;
+		console.log('name = ' + realname.first + ' ' + realname.last);
 		
-		User.update({ _id: user._id }, { $set: { name: name } }, function(err) {
+		User.update({ _id: user._id }, { $set: { realname: realname } }, function(err) {
 			if (err) { return next(new Error('Sorry')); }
 		});
 		res.json(user);

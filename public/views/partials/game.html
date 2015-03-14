@@ -2,7 +2,7 @@
 	<p><small><a href="#/type/{{game.gametype}}"><span class="glyphicon glyphicon-arrow-left"></span> {{typename}}</a></small></p>
 
 	<h1>Game: {{game.identifier.gameno}}, Test: {{game.identifier.testno}}</h1>
-
+	<div><b>Your stats:</b> {{(user.attempts| filter:{success:true}).length}}/{{user.attempts.length}}</div>
 	<div>
 		Goal time: {{game.goal.minutes}}:{{game.goal.seconds}}
 	</div>
@@ -11,11 +11,15 @@
 	<form class="form-inline" ng-submit="addAttempt()">
 		<div class="form-group">
 			<label>Minutes</label>
-			<input type="text" class="form-control" ng-model="newAttempt.attempt.minutes">
+			<input type="number" required="" min="0" max="60" class="form-control" ng-model="newAttempt.attempt.minutes">
 		</div>
 		<div class="form-group">
 			<label>Seconds</label>
-			<input type="text" class="form-control" ng-model="newAttempt.attempt.seconds">
+			<input type="number" required="" min="0" max="60" class="form-control" ng-model="newAttempt.attempt.seconds">
+		</div>
+		<div class="form-group">
+			<label>Accuracy</label>
+			<input type="number" required="" min="0" max="{{game.questions}}" class="form-control" ng-model="newAttempt.attempt.accuracy"> / {{game.questions}}
 		</div>
 		<button class="btn btn-sm">Submit</button>
 	</form>
@@ -27,12 +31,15 @@
 			<tr>
 				<th>Attempt date</th>
 				<th>Game time</th>
+				<th>Win?</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="attempt in attempts | filter: { game: game._id }">
 				<td>{{attempt.attempt.time | attemptDate}}</td>
 				<td>{{attempt.attempt.minutes}}:{{attempt.attempt.seconds}}</td>
+				<td>{{attempt.success}}</td>
 				<td><button ng-click="delAttempt(attempt._id)">Delete</button></td>
 			</tr>
 		</tbody>

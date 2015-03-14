@@ -66,3 +66,15 @@ app.filter('attemptDate', function() {
 		}
 	};
 });
+
+app.filter('resolveType', function(types) {
+	return function (id, types) {
+		if (typeof types !== 'undefined' && types.length > 0) {
+			for (i = 0; i < types.length; i++) {
+				if (types[i]._id == id) {
+					return types[i].typename;
+				}
+			};
+		};
+	};
+});

@@ -9,16 +9,18 @@ angular.module('UserService', []).factory('user', ['$http', function($http) {
 			angular.copy(data.attempts, o.attempts);
 		});
 	};
-	o.updateUser = function(name) {
-		return $http.put('/api/user', name).success(function(data){
+	o.updateUser = function(realname) {
+		$http.put('/api/user', realname).success(function(data){
 			angular.copy(data, o.user);
 		});
+		return o.getUser();
 	};
 	o.addAttempt = function(newAttempt) {
 		//todo
-		return $http.post('/api/user/attempt', newAttempt)
+		$http.post('/api/user/attempt', newAttempt)
 		.success(function (data){
 			o.attempts.push(data);
+			return o.getUser();
 		});
 	};
 	o.delAttempt = function (id) {

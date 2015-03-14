@@ -1,7 +1,9 @@
 workplan:
 
+--fix leading 0s issue
+
 - add timer and auto add option
-- build in success/failure
+XX- build in success/failure
 - figure out how to tech test
 - protect admin page
 - reorg API

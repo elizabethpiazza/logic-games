@@ -5,11 +5,11 @@
 		<table class="table">
 			<tr>
 				<td>First Name</td>
-				<td>{{user.name.first}}</td>
+				<td>{{user.realname.first}}</td>
 			</tr>
 			<tr>
 				<td>Last Name</td>
-				<td>{{user.name.last}}</td>
+				<td>{{user.realname.last}}</td>
 			</tr>
 			<tr>
 				<td>Email</td>
@@ -27,13 +27,13 @@
 			<form ng-submit="updateUser()">
 				<div class="form-group">
 					<label>First name</label>
-					<input type="text" class="form-control" ng-model="user.name.first">
+					<input type="text" class="form-control" ng-model="userUpdate.realname.first">
 				</div>
 				<div class="form-group">
 					<label>Last name</label>
-					<input type="text" class="form-control" ng-model="user.name.last">
+					<input type="text" class="form-control" ng-model="userUpdate.realname.last">
 				</div>
-				<br><button class="btn btn-lg" type="submit">Save</button>
+				<br><button class="btn btn-lg" onClick="toggleForm('edit-form')" type="submit">Save</button>
 		</form>
 	</div>
 </div>
