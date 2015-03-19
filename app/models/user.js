@@ -10,7 +10,8 @@ var UserSchema = new mongoose.Schema({
 		email: String,
 		password: String
 	},
-	attempts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Attempt' }]
+	attempts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Attempt' }],
+	admin: { type: Boolean, default: false }
 });
 
 UserSchema.methods.generateHash = function(password) {

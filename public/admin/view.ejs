@@ -1,0 +1,87 @@
+<div class="container-fluid">
+	<h1>Admin Page</h1>
+
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th>Type id</th>
+				<th>Delete?</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="type in types | orderBy:'level'">
+				<td>{{type.typename}}</td>
+				<td><button ng-click="delType(type._id)">Delete</button></td>
+			</tr>
+			<tr class="form-inline">
+				<td><div class="form-group">
+					<label>Name</label>
+					<input type="text" class="form-control" required="" ng-model="newType.typename">
+				</div></td>
+				<td><div class="form-group">
+					<label>Level</label>
+					<input type="number" required="" min="1" max="14" class="form-control" ng-model="newType.level">
+				</div></td>
+				<td><button ng-click="addType($scope.newType)">+</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th>Test #/Game #</th>
+				<th>Type</th>
+				<th>Mon/Yr</th>
+				<th>Goal</th>
+				<th>Questions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="game in games">
+				<td>{{game.identifier.testno}}, {{game.identifier.gameno}}</td>
+				<td>{{game.gametype | resolveType:types}}</td>
+				<td>{{game.identifier.month}} {{game.identifier.year}}</td>
+				<td>{{game.goal.minutes}}:{{game.goal.seconds}}</td>
+				<td>{{game.questions}}</td>
+				<td><button ng-click="delGame(game._id)">Delete</button></td>
+			</tr>
+		</tbody>
+	</table>
+			<form class="form-inline">
+				<div class="form-group">
+					<label>Test#</label>
+					<input type="number" required="" min="1" max="74" class="form-control" ng-model="newGame.identifier.testno">
+					<label>Game#</label>
+					<input type="number" required="" min="1" max="15" class="form-control" ng-model="newGame.identifier.gameno">
+				</div>
+				<div class="form-group">
+					<label>Type</label>
+					<select ng-model="newGameType" required="" ng-options="type._id as type.typename for type in types | orderBy: 'level'"></select>
+				</div>
+				<div class="form-group">
+					<label>Month</label>
+					<select ng-model="newGame.identifier.month"required="">
+						<option value = "Feb">Feb</option>
+						<option value = "June">June</option>
+						<option value = "Sept">Sept</option>
+						<option value = "Oct">Oct</option>
+						<option value = "Dec">Dec</option>
+					</select>
+					<label>Year</label>
+					<input type="number" required="" min="1990" max="2014" class="form-control" ng-model="newGame.identifier.year">
+				</div>
+				<div class="form-group">
+					<label>Min</label>
+					<input type="number" required="" min="0" max="60" class="form-control" ng-model="newGame.goal.minutes">
+					<label>Sec</label>
+					<input type="number" required="" min="0" max="60" class="form-control" ng-model="newGame.goal.seconds">
+				</div>
+				<div class="form-group">
+					<label>Questions</label>
+					<input type="number" required="" min="1" max="20" class="form-control" ng-model="newGame.questions">
+				</div>
+				<button ng-click="addGame($scope.newGame)">+</button>
+			</form>
+
+</div>

@@ -1,63 +1,69 @@
-var app = angular.module('logic-games', ['ui.router', 'MainCtrl', 'HomeCtrl', 'GameCtrl', 'GameDetailCtrl', 'ProfileCtrl', 'AdminCtrl', 'TypesService', 'GamesService', 'UserService', 'AdminService']);
+var app = angular.module('logic-games', ['ui.router', 'MainCtrl', 'UserService', 'TypesCtrl', 'TypesService', 'GamesCtrl', 'AllGamesCtrl', 'GamesService', 'AttemptsCtrl', 'AttemptsService', 'AdminCtrl', 'AdminService']);
 
-//angular stuff begins here
 app.config([
 	'$stateProvider',
 	'$urlRouterProvider',
-	function ($stateProvider, $urlRouterProvider) {
-		$urlRouterProvider.otherwise('home');
+	'$locationProvider',
+	function ($stateProvider, $urlRouterProvider, $locationProvider) {
+		$urlRouterProvider.otherwise('types');
 		$stateProvider
-			.state('home', {
-				url: '/home',
-				templateUrl: '/views/partials/home.html',
-				controller: 'HomeCtrl',
+			.state('types', {
+				url: '/types',
+				templateUrl: '/types/view.ejs',
+				controller: 'TypesCtrl',
 				resolve: {
-					typePromise: ['users', function(users){
-						return users.getUser();
-					}],
 					typePromise: ['types', function(types){
 						return types.getTypes();
 					}]
 				}
 			})
-			.state('type', {
-				url: '/type/{id}',
-				templateUrl: '/views/partials/type.html',
-				controller: 'GameCtrl',
+			.state('games', {
+				url: '/types/{id}',
+				templateUrl: '/games/view.ejs',
+				controller: 'GamesCtrl',
 				resolve: {
-					gamesPromise: ['$stateParams', 'games', function($stateParams, games) {
+					gamePromise: ['$stateParams', 'games', function($stateParams, games){
 						return games.getGames($stateParams.id);
 					}]
 				}
 			})
-			.state('game', {
-				url: '/game/{id}',
-				templateUrl: '/views/partials/game.html',
-				controller: 'GameDetailCtrl',
+			.state('allgames', {
+				url: '/games',
+				templateUrl: '/games/view.ejs',
+				controller: 'AllGamesCtrl',
 				resolve: {
-					gamePromise: ['$stateParams', 'games', function($stateParams, games){
-						return games.getGame($stateParams.id);
+					gamePromise: ['games', function(games){
+						return games.getAllGames();
 					}]
 				}
 			})
-			.state('profile', {
-				url: '/profile',
-				templateUrl: '/views/partials/profile.ejs',
-				controller: 'ProfileCtrl'
+			.state('attempts', {
+				url: '/games/{id}/progress',
+				templateUrl: '/attempts/view.ejs',
+				controller: 'AttemptsCtrl',
+				resolve: {
+					gamePromise: ['$stateParams', 'attempts', function($stateParams, attempts){
+						return attempts.getGame($stateParams.id);
+					}],
+					attemptPromise: ['$stateParams', 'attempts', function($stateParams, attempts){
+						return attempts.getAttempts();
+					}]
+				}
 			})
 			.state('admin', {
 				url: '/admin',
-				templateUrl: '/views/partials/admin.ejs',
+				templateUrl: '/admin/view.ejs',
 				controller: 'AdminCtrl',
 				resolve: {
 					typePromise: ['admin', function(admin){
-						return admin.getAllTypes();
+						return admin.getAllGames();
 					}],
 					gamePromise: ['admin', function(admin){
-						return admin.getAllGames();
+						return admin.getAllTypes();
 					}]
 				}
 			});
+		//$locationProvider.html5Mode(true);
 	}
 ]);
 
@@ -96,7 +102,9 @@ app.filter('fixSeconds', function() {
 	return function (input) {
 		if (input) {
 			input.toString();
-			return ("0" + input).slice (-2);
-		};
+			return ("00" + input).slice (-2);
+		} else {
+			return "00";
+		}
 	};
 });
