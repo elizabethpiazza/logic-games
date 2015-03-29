@@ -100,6 +100,13 @@ router.route('/games')
 			if (err) { return next(err); }
 			res.json(games);
 		});
+	})
+	.post(function(req, res, next) {
+		var game = new Game(req.body);
+		game.save(function(err) {
+			if (err) { return next(err); }
+			res.json(game);
+		});
 	});
 router.route('/games/:game')
 	.delete(function(req, res, next) {

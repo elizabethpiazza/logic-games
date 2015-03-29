@@ -1,0 +1,16 @@
+<div class="container-fluid text-center">
+	<h1>Progress</h1>
+	<br>
+	<h4>Games tried: {{games.length}}</h4>
+	<h4>Games won: {{ gamesWon }}</h4>
+	<br><br>
+	<table class="table table-hover table-condensed">
+		<tbody>
+			<tr ng-repeat="game in games">
+				<td>{{(user.attempts | filter:{success:true, game:game}).length | successCheck }}</td>
+				<td><a href="#/games/{{game}}/progress">{{game | resolveGame:allGames}}</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

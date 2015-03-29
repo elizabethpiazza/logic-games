@@ -1,7 +1,7 @@
 angular.module('AttemptsCtrl', ['AttemptsService', 'UserService']).controller('AttemptsCtrl', ['$scope', 'attempts', 'user', function($scope, attempts, user) {
 	
 	$scope.game = attempts.game;
-	$scope.attempts = gameAttempts(attempts.attempts, $scope.game);
+	$scope.attempts = attempts.attempts;
 	$scope.attemptTimes = gameAttemptTimes($scope.attempts);
 
 	$scope.addAttempt = function(newAttempt){
@@ -13,10 +13,12 @@ angular.module('AttemptsCtrl', ['AttemptsService', 'UserService']).controller('A
 			success : $scope.newAttempt.success
 		});
 		$scope.newAttempt = {};
+		$scope.attempts = attempts.attempts;
 	};
 
 	$scope.delAttempt = function(id){
 		attempts.delAttempt(id);
+		$scope.attempts = gameAttempts(attempts.attempts, $scope.game);
 	};
 
 	function gameAttempts(attempts, game) {

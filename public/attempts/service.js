@@ -17,7 +17,7 @@ angular.module('AttemptsService', []).factory('attempts', ['$http', function($ht
 	};
 
 	o.addAttempt = function(newAttempt) {
-		$http.post('/api/user/attempt', newAttempt)
+		return $http.post('/api/user/attempt', newAttempt)
 		.success(function (data){
 			o.attempts.push(data);
 		});

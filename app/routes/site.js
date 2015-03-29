@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
 	// HOME PAGE (not logged in)
 	app.get('/home', function(req, res) {
 		res.render('open/home.ejs', {
-			user : req.user
+			user : req.user, message: req.flash('registerMessage')
 		});
 	});
 

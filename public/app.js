@@ -1,12 +1,22 @@
-var app = angular.module('logic-games', ['ui.router', 'MainCtrl', 'UserService', 'TypesCtrl', 'TypesService', 'GamesCtrl', 'AllGamesCtrl', 'GamesService', 'AttemptsCtrl', 'AttemptsService', 'AdminCtrl', 'AdminService']);
+var app = angular.module('logic-games', ['ui.router', 'MainCtrl', 'UserService', 'TypesCtrl', 'TypesService', 'GamesCtrl', 'AllGamesCtrl', 'GamesService', 'AttemptsCtrl', 'AttemptsService', 'AdminCtrl', 'AdminService', 'ProgressCtrl']);
 
 app.config([
 	'$stateProvider',
 	'$urlRouterProvider',
 	'$locationProvider',
 	function ($stateProvider, $urlRouterProvider, $locationProvider) {
-		$urlRouterProvider.otherwise('types');
+		$urlRouterProvider.otherwise('games');
 		$stateProvider
+			.state('home', {
+				url: '/home',
+				templateUrl: '/home/view.ejs'
+				/*controller: 'TypesCtrl',
+				resolve: {
+					typePromise: ['types', function(types){
+						return types.getTypes();
+					}]
+				}*/
+			})
 			.state('types', {
 				url: '/types',
 				templateUrl: '/types/view.ejs',
@@ -50,6 +60,19 @@ app.config([
 					}]
 				}
 			})
+			.state('progress', {
+				url: '/progress',
+				templateUrl: '/progress/view.ejs',
+				controller: 'ProgressCtrl',
+				resolve: {
+					gamePromise: ['games', function(games){
+						return games.getAllGames();
+					}],
+					attemptPromise: ['attempts', function(attempts){
+						return attempts.getAttempts();
+					}]
+				}
+			})
 			.state('admin', {
 				url: '/admin',
 				templateUrl: '/admin/view.ejs',
@@ -82,6 +105,18 @@ app.filter('resolveType', function(types) {
 			for (i = 0; i < types.length; i++) {
 				if (types[i]._id == id) {
 					return types[i].typename;
+				}
+			};
+		};
+	};
+});
+
+app.filter('resolveGame', function(games) {
+	return function (id, games) {
+		if (typeof games !== 'undefined' && games.length > 0) {
+			for (i = 0; i < games.length; i++) {
+				if (games[i]._id == id) {
+					return "Test " + games[i].identifier.testno + ", Game " + games[i].identifier.gameno;
 				}
 			};
 		};

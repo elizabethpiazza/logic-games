@@ -11,8 +11,13 @@ angular.module('AdminCtrl', ['AdminService']).controller('AdminCtrl', ['$scope',
 		$scope.newType = {};
 	};
 	$scope.addGame = function(newGame){
+		console.log('was called');
 		if ($scope.newGame === {}) { return; }
-		admin.addGame($scope.newGame, $scope.newGameType);
+		if ($scope.newGameType != undefined){
+			admin.addGamePS($scope.newGame, $scope.newGameType);
+		} else {
+			admin.addGame($scope.newGame);
+		}
 		$scope.newGame = {};
 	};
 	$scope.delType = function(id){

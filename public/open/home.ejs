@@ -1,24 +1,81 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
+    <meta charset="UTF=8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <base href="/">
+    
+    <title>GameGainz</title>
+
+    <link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/styleO.css">
+    <script src="assets/uijs.js"></script>
 </head>
 <body>
-<div class="container">
-
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
-
-        <p>Login or Register with:</p>
-
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/register" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+<div class="container-fluid col-md-8 col-md-offset-2 text-center">
+    <h1>Game Gainz</h1>
+    <div>
+        You're working.
+            <br><b>HARD.</b>
+            <br>To improve at the Logic Games section of the LSAT.
+            <br>But is it working for you?
     </div>
+    <div class="text-left">
+        <p>Are you:</p>
+            <ul>
+                <li>Improving your accuracy?</li>
+                <li>Getting fast enough?</li>
+                <li>Tracking your overall logic games progress?</li>
+                <li><b>Going to get that 180?!?</b></li>
+            </ul>
+        <p>Maybe you are paying attention to these things. Hell, if you are neurotic enough to take the LSAT you probably have a 15 sheet+ spreadsheet detailing all of these metrics.</p>
+        <p><b>Game Gainz</b> is here so you don't have to worry about that kind of thing. Focus on the studying. Focus on the test. Let us take care of the grunt work, and <b>focus</b> on what matters.</p>
+    </div>
+    <div>
+        <h2>Ready to get started?</h2>
+
+        <p>Login or <a href="/register">Register</a>:</p>
+
+        <button class="btn btn-default" onClick="toggleForm('login-form')">Login</button>
+        <!-- <button class="btn btn-default" onClick="toggleForm('signup-form')">Signup</button> -->
+    </div>
+
+    <div class="hide" id="login-form">
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+        <form class="panel panel-default col-sm-4 col-sm-offset-4" action="/login" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Login</button>
+        </form>
+    </div>
+
+<!--     <div class="hide" id="signup-form">
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+        <form class="panel panel-default col-sm-4 col-sm-offset-4" action="/register" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        </form>
+    </div> -->
 
 </div>
 </body>

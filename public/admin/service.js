@@ -20,7 +20,14 @@ angular.module('AdminService', []).factory('admin', ['$http', function($http) {
 		});
 		//return o.getAllTypes();
 	};
-	o.addGame = function(newGame, typeid) {
+	o.addGame = function(newGame) {
+		return $http.post('/api/admin/games', newGame)
+		.success(function (data){
+			o.games.push(data);
+		});
+		//return o.getAllGames();
+	};
+	o.addGamePS = function(newGame, typeid) {
 		return $http.post('/api/admin/types/' + typeid + '/games', newGame)
 		.success(function (data){
 			o.games.push(data);

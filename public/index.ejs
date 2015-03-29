@@ -8,16 +8,17 @@
     
     <title>GameGainz</title>
 
-    <link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css"><!-- 
+    <link rel="stylesheet" href="assets/theme.min.css">
+    <link rel="stylesheet" href="assets/style.css"> -->
 
-    <script src="assets/uijs.js"></script>
     <script src="assets/libs/angular/angular.min.js"></script>
     <script src="assets/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="assets/libs/bootstrap/js/dropdown.js"></script>
     <script src="assets/libs/bootstrap/js/transition.js"></script>
     <script src="assets/libs/bootstrap/js/collapse.js"></script>
+    <script src="assets/uijs.js"></script>
 
 
     <script src="mainctrl.js"></script>
@@ -32,6 +33,7 @@
     <script src="attempts/service.js"></script>
     <script src="admin/ctrl.js"></script>
     <script src="admin/service.js"></script>
+    <script src="progress/ctrl.js"></script>
 
 
     <script src="app.js"></script>
@@ -39,7 +41,7 @@
 </head>
     <body ng-app="logic-games" ng-controller="MainCtrl">
 
-    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <nav class="navbar navbar-default"><!-- navbar-fixed-top -->
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -49,30 +51,49 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#/types">GameGainz</a>
+          <a class="navbar-brand" href="#/home">
+            <span class="hidden-xs" title="Home" aria-hidden="true">GameGainz<!-- <img src="assets/logo.gif" class="logo"> --></span>
+            <span class="visible-xs-block">GameGainz</span>
+          </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="collapse-menu">
           <ul class="nav navbar-nav navbar-right">
-            <li role="presentation" ng-show="user.admin"><a href="#/admin">Admin</a></li>
-            <li role="presentation"><a href="#/games">All Games</a></li>
-            <p class="navbar-text">Signed in as </p>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{user.realname.first ? user.realname.first : user.local.email}} <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#/profile">Profile</a></li>
-                <li class="divider"></li>
-                <li><a href="/logout">Log out</a></li>
-              </ul>
-            </li>
+            <li role="presentation"><a href="#/home">
+                <span class="glyphicon glyphicon-home nav-icon hidden-xs" title="Home" aria-hidden="true"></span>
+                <span class="visible-xs-block">Home</span>
+            </a></li>
+            <li role="presentation"><a href="#/games">
+                <span class="glyphicon glyphicon-book nav-icon hidden-xs" title="All games" aria-hidden="true"></span>
+                <span class="visible-xs-block">All Games</span>
+            </a></li>
+            <li role="presentation"><a href="#/types">
+                <span class="glyphicon glyphicon-th nav-icon hidden-xs" title="Games by type" aria-hidden="true"></span>
+                <span class="visible-xs-block">Games by Type</span>
+            </a></li>
+            <li role="presentation"><a href="#/progress">
+                <span class="glyphicon glyphicon-stats nav-icon hidden-xs" title="Progress" aria-hidden="true"></span>
+                <span class="visible-xs-block">Progress</span>
+            </a></li>
+            <!-- <li role="presentation"><a href="#/profile">
+                <span class="glyphicon glyphicon-cog nav-icon hidden-xs" title="Profile settings" aria-hidden="true"></span>
+                <span class="visible-xs-block">Settings</span>
+            </a></li> -->
+            <li role="presentation" ng-show="user.admin"><a href="#/admin">
+                Admin
+                <span class="visible-xs-block">Admin</span>
+            </a></li>
+            <li role="presentation"><a href="/logout">
+                <span class="glyphicon glyphicon-log-out nav-icon hidden-xs" title="Log out" aria-hidden="true"></span>
+                <span class="visible-xs-block">Log out</span>
+            </a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
 
-    <div class="container-fluid">
-
+    <div class="container-fluid col-md-8 col-md-offset-2" id="contentwrap">
         <div ui-view></div>
 
     </div>

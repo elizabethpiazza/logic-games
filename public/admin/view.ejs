@@ -11,7 +11,7 @@
 		<tbody>
 			<tr ng-repeat="type in types | orderBy:'level'">
 				<td>{{type.typename}}</td>
-				<td><button ng-click="delType(type._id)">Delete</button></td>
+				<td><button class="btn btn-default" ng-click="delType(type._id)">Delete</button></td>
 			</tr>
 			<tr class="form-inline">
 				<td><div class="form-group">
@@ -22,7 +22,7 @@
 					<label>Level</label>
 					<input type="number" required="" min="1" max="14" class="form-control" ng-model="newType.level">
 				</div></td>
-				<td><button ng-click="addType($scope.newType)">+</button></td>
+				<td><button class="btn btn-default" ng-click="addType($scope.newType)">+</button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -44,7 +44,7 @@
 				<td>{{game.identifier.month}} {{game.identifier.year}}</td>
 				<td>{{game.goal.minutes}}:{{game.goal.seconds}}</td>
 				<td>{{game.questions}}</td>
-				<td><button ng-click="delGame(game._id)">Delete</button></td>
+				<td><button class="btn btn-default" ng-click="delGame(game._id)">Delete</button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -61,7 +61,7 @@
 				</div>
 				<div class="form-group">
 					<label>Month</label>
-					<select ng-model="newGame.identifier.month"required="">
+					<select ng-model="newGame.identifier.month" required="">
 						<option value = "Feb">Feb</option>
 						<option value = "June">June</option>
 						<option value = "Sept">Sept</option>
@@ -73,15 +73,15 @@
 				</div>
 				<div class="form-group">
 					<label>Min</label>
-					<input type="number" required="" min="0" max="60" class="form-control" ng-model="newGame.goal.minutes">
+					<input type="number" min="0" max="60" class="form-control" ng-model="newGame.goal.minutes">
 					<label>Sec</label>
-					<input type="number" required="" min="0" max="60" class="form-control" ng-model="newGame.goal.seconds">
+					<input type="number" min="0" max="60" class="form-control" ng-model="newGame.goal.seconds">
 				</div>
 				<div class="form-group">
 					<label>Questions</label>
 					<input type="number" required="" min="1" max="20" class="form-control" ng-model="newGame.questions">
 				</div>
-				<button ng-click="addGame($scope.newGame)">+</button>
+				<button class="btn btn-default" ng-click="addGame($scope.newGame)">+</button>
 			</form>
 
 </div>

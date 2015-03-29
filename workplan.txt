@@ -1,14 +1,9 @@
- workplan:
-
+workplan:
 - add timer and auto add option
 - figure out how to tech test
-- protect admin page
-- reorg API
 - stylize
--- do i really need games types and game detail ctrl
---fix leading 0s issue
---show success
-
+- redo home
+- allow saved sign on
 XX - add edit user info to profile page
 XX - add features to game page - allow user to enter new attempt
 XX - clean all messy console logs
@@ -29,5 +24,10 @@ XX- create admin page to add games
 XX- figure out how to calculate success
 XX- implement ui-router
 XX- number of games each
+XX- protect admin page
+XX- reorg API
 XX- reset db to test new models
+XX-- do i really need games types and game detail ctrl
 XX-- protect /api/
+XX--fix leading 0s issue
+XX--show success
