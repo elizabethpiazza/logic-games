@@ -7,6 +7,7 @@ var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var MongoStore = require('connect-mongostore')(session);
 var passport= require('passport');
 var flash = require('connect-flash');
 
@@ -29,7 +30,10 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/public')
 app.set('json spaces', 4);
 
-app.use(session({ secret: 'lizzardrules' }));
+app.use(session({
+    secret: 'lizzardrules',
+    store: new MongoStore({'db': 'sessions'})
+  }));
 
 app.use( function (req, res, next) {
 	if ( req.method == 'POST' && req.url == '/login' ) {
