@@ -7,6 +7,7 @@ function isLoggedIn(req, res, next) {
 module.exports = function(app, passport) {
 	// HOME PAGE (must be logged in)
 	app.get('/', isLoggedIn, function(req, res) {
+		console.log(req.session.cookie);
 		res.render('index.ejs');
 	});
 
